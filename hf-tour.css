@@ -75,7 +75,7 @@
   left: 0;
   box-sizing: border-box;
   width: var(--hft-width);
-  max-width: calc(100vw - 24px);
+  max-width: calc(100% - 24px);
   padding: 18px 18px 14px;
   border-radius: var(--hft-radius);
   background: var(--hft-bg);

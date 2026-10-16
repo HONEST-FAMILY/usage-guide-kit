@@ -98,4 +98,4 @@ pip install playwright
 python tools/check_tour.py https://dev.고객사.kr/admin/products/create "#guide-start"
 ```
 
-설명창이 화면 밖으로 나감 · 대상이 가려짐 · 설명창이 대상을 덮음 · 꼬리가 엉뚱한 곳을 가리킴을 단계마다 검사하고, 문제가 0건이어야 통과입니다. 로그인이 필요한 화면은 먼저 로그인한 상태를 파일로 저장(Playwright `storage_state`)해 `--storage 상태.json`으로 넘깁니다. `tools/edge-cases.html`은 큰 대상·스크롤 상자·늦게 생기는 대상·없는 대상을 모아 둔 시험 페이지입니다.
+설명창이 화면 밖으로 나감 · 대상이 가려짐 · 설명창이 대상을 덮음 · 꼬리가 엉뚱한 곳을 가리킴 · 강조 테두리가 대상에서 어긋남(1.5px 넘게)을 단계마다 검사하고, 문제가 0건이어야 통과입니다. PC 크기는 윈도우처럼 스크롤바를 보이게 하고 잽니다(스크롤바 폭만큼 어긋나던 문제를 잡기 위해). 로그인이 필요한 화면은 먼저 로그인한 상태를 파일로 저장(Playwright `storage_state`)해 `--storage 상태.json`으로 넘깁니다. `tools/edge-cases.html`은 큰 대상·스크롤 상자·늦게 생기는 대상·없는 대상을 모아 둔 시험 페이지입니다.

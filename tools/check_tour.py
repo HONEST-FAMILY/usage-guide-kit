@@ -21,6 +21,15 @@ MEASURE = r"""() => {
     if (d) { const b = ring.getBBox(); hole = { left: b.x, top: b.y, right: b.x + b.width, bottom: b.y + b.height }; }
   } catch (e) {}
   const a = arrow && !arrow.hidden ? arrow.getBoundingClientRect() : null;
+  let drift = null;
+  const live = window.HFTour && HFTour.active && HFTour.active();
+  if (live && ring.getAttribute('d')) {
+    const want = live.holeFor(live.target && document.contains(live.target) ? live.target : null, live.steps[live.index]);
+    if (want.w > 0 && want.h > 0) {
+      const got = ring.getBoundingClientRect();
+      drift = Math.max(Math.abs(got.left - want.x), Math.abs(got.top - want.y), Math.abs(got.right - (want.x + want.w)), Math.abs(got.bottom - (want.y + want.h)));
+    }
+  }
   const title = (root.querySelector('.hft-pop__title') || {}).textContent || '';
   let shown = null;
   const inst = window.HFTour && HFTour.active && HFTour.active();
@@ -40,7 +49,7 @@ MEASURE = r"""() => {
     shown = { ratio: full ? Math.max(0, x2 - x1) * Math.max(0, y2 - y1) / full : 0, tall: r.height > innerHeight * 0.6 };
   }
   return {
-    vw: innerWidth, vh: innerHeight,
+    vw: document.documentElement.clientWidth, vh: innerHeight, drift,
     pop: { left: p.left, top: p.top, right: p.right, bottom: p.bottom },
     hole, placement: pop.getAttribute('data-placement'), title,
     arrow: a ? { cx: a.left + a.width / 2, cy: a.top + a.height / 2 } : null,
@@ -58,6 +67,8 @@ def judge(m, tol=1.0):
     s = m.get("shown")
     if s and not s["tall"] and s["ratio"] < 0.9:
         problems.append("대상이 가려져 일부만 보임 (%d%%)" % round(s["ratio"] * 100))
+    if m.get("drift") is not None and m["drift"] > 1.5:
+        problems.append("강조 테두리가 대상에서 어긋남 (%.1fpx)" % m["drift"])
     h = m["hole"]
     if h:
         if h["bottom"] <= 0 or h["top"] >= vh or h["right"] <= 0 or h["left"] >= vw:
@@ -135,9 +146,9 @@ async def main():
     total = bad = 0
     async with async_playwright() as p:
         try:
-            browser = await p.chromium.launch(headless=True, channel="chrome")
+            browser = await p.chromium.launch(headless=True, channel="chrome", ignore_default_args=["--hide-scrollbars"])
         except Exception:
-            browser = await p.chromium.launch(headless=True)
+            browser = await p.chromium.launch(headless=True, ignore_default_args=["--hide-scrollbars"])
         for vp in args.viewports.split(","):
             for trig in args.triggers:
                 rows, errors = await run_one(browser, args.url, vp, trig, args.max_steps, args.reduced, args.storage or None)

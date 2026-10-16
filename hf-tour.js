@@ -261,6 +261,7 @@
     this.handleKey = this.handleKey.bind(this);
     this.scheduleFollow = this.scheduleFollow.bind(this);
     this.positionBeacon = this.positionBeacon.bind(this);
+    this.watch = this.watch.bind(this);
     this.build();
     this.mountHelpers();
     var auto = this.opts.autoStart;
@@ -396,6 +397,15 @@
     this.positionBeacon();
   };
 
+  Tour.prototype.box = function () {
+    var root = this.ui.root;
+    if (!root.hidden) {
+      var r = root.getBoundingClientRect();
+      if (r.width && r.height) return { w: r.width, h: r.height };
+    }
+    return { w: document.documentElement.clientWidth || window.innerWidth, h: window.innerHeight };
+  };
+
   Tour.prototype.isMobile = function () {
     return window.innerWidth <= this.opts.mobileBreakpoint;
   };
@@ -413,6 +423,8 @@
       document.addEventListener('keydown', this.handleKey, true);
       window.addEventListener('resize', this.scheduleFollow);
       window.addEventListener('scroll', this.scheduleFollow, true);
+      this.watchTimer = setInterval(this.watch, 200);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(this.scheduleFollow);
       if (this.launcherEl) this.launcherEl.classList.add('hft-launcher--hidden');
       if (this.beaconEl) this.beaconEl.hidden = true;
       if (this.opts.onStart) this.opts.onStart.call(this);
@@ -465,6 +477,7 @@
     document.removeEventListener('keydown', this.handleKey, true);
     window.removeEventListener('resize', this.scheduleFollow);
     window.removeEventListener('scroll', this.scheduleFollow, true);
+    clearInterval(this.watchTimer);
     if (this.resizeObserver) this.resizeObserver.disconnect();
     if (active === this) active = null;
     var root = this.ui.root;
@@ -548,7 +561,7 @@
     if (mobile) {
       var m = this.opts.margin;
       this.ui.pop.style.left = m + 'px';
-      this.ui.pop.style.width = (window.innerWidth - 2 * m) + 'px';
+      this.ui.pop.style.width = (this.box().w - 2 * m) + 'px';
     } else {
       this.ui.pop.style.width = '';
     }
@@ -624,7 +637,7 @@
   Tour.prototype.availableArea = function () {
     var m = this.opts.margin;
     var top = m + (this.opts.scrollOffset || 0);
-    var bottom = window.innerHeight - m;
+    var bottom = this.box().h - m;
     if (this.isMobile()) {
       var sheet = this.ui.pop.offsetHeight || 0;
       if (this.sheetAtTop) top += sheet + m;
@@ -657,8 +670,9 @@
   };
 
   Tour.prototype.holeFor = function (target, step) {
-    var vw = window.innerWidth;
-    var vh = window.innerHeight;
+    var box = this.box();
+    var vw = box.w;
+    var vh = box.h;
     if (!target) return { x: vw / 2, y: vh / 2, w: 0, h: 0, r: 0 };
     var gap = this.stepValue(step, 'gap');
     var radius = this.stepValue(step, 'radius');
@@ -678,13 +692,9 @@
   };
 
   Tour.prototype.drawHole = function (h) {
-    var vw = window.innerWidth;
-    var vh = window.innerHeight;
+    var box = this.box();
     var ui = this.ui;
-    ui.svg.setAttribute('viewBox', '0 0 ' + vw + ' ' + vh);
-    ui.svg.setAttribute('width', vw);
-    ui.svg.setAttribute('height', vh);
-    var outer = 'M0 0H' + vw + 'V' + vh + 'H0Z';
+    var outer = 'M-2 -2H' + (box.w + 2) + 'V' + (box.h + 2) + 'H-2Z';
     var inner = roundedRectPath(h.x, h.y, h.w, h.h, h.r);
     ui.shade.setAttribute('d', outer + inner);
     ui.ring.setAttribute('d', inner);
@@ -758,8 +768,9 @@
     var ui = this.ui;
     var pop = ui.pop;
     var m = this.opts.margin;
-    var vw = window.innerWidth;
-    var vh = window.innerHeight;
+    var box = this.box();
+    var vw = box.w;
+    var vh = box.h;
     var useArrow = this.stepValue(step, 'arrow');
 
     pop.style.maxHeight = (vh - 2 * m) + 'px';
@@ -871,6 +882,17 @@
     });
   };
 
+  Tour.prototype.watch = function () {
+    if (!this.open || this.revealing || this.chasing || !this.hole) return;
+    var goal = this.goal();
+    var h = this.hole;
+    var moved = Math.abs(goal.x - h.x) > 0.5 || Math.abs(goal.y - h.y) > 0.5 || Math.abs(goal.w - h.w) > 0.5 || Math.abs(goal.h - h.h) > 0.5;
+    if (!moved) return;
+    this.chase();
+    var target = this.target && document.contains(this.target) ? this.target : null;
+    this.placePopover(target, this.steps[this.index], goal);
+  };
+
   Tour.prototype.observe = function (target) {
     var self = this;
     if (typeof ResizeObserver === 'undefined') return;
@@ -926,6 +948,6 @@
     active: function () { return active; },
     isDone: function (key) { return storageGet(key) === 'done'; },
     reset: function (key) { storageSet(key, null); },
-    version: '1.0.0'
+    version: '1.0.1'
   };
 });
