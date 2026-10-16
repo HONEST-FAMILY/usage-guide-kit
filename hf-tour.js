@@ -722,7 +722,7 @@
         return;
       }
       var goal = self.goal();
-      var dt = Math.min(64, now - last);
+      var dt = Math.min(1000, now - last);
       last = now;
       var k = 1 - Math.pow(0.002, dt / 340);
       var cur = self.hole;
@@ -948,6 +948,6 @@
     active: function () { return active; },
     isDone: function (key) { return storageGet(key) === 'done'; },
     reset: function (key) { storageSet(key, null); },
-    version: '1.0.1'
+    version: '1.0.2'
   };
 });
