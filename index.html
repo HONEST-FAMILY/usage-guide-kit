@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>어니스트 투어 — 우리가 직접 만든 사용 가이드</title>
+<meta property="og:title" content="어니스트 투어 — 우리가 직접 만든 사용 가이드">
+<meta property="og:description" content="Ant Design 투어를 참고해 외부 코드 없이 새로 만든 단계별 안내. 직접 눌러 써 보세요.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Crect width=%2216%22 height=%2216%22 rx=%225%22 fill=%22%232f6bff%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="hf-tour.css">
+<link rel="stylesheet" href="demo.css">
+</head>
+<body>
+<header class="top">
+  <div class="top__in">
+    <a class="brand" href="#"><span class="brand__mark" aria-hidden="true"></span>어니스트 투어</a>
+    <nav class="top__nav" aria-label="바로가기">
+      <a href="#basic">기본</a>
+      <a href="#nomask">막지 않는 모드</a>
+      <a href="#placement">위치</a>
+      <a href="#indicator">진행 표시</a>
+      <a href="#admin">관리자 화면</a>
+      <a href="#better">더한 것</a>
+      <a href="#usage">붙이는 법</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <p class="eyebrow">어니스트패밀리 · 사용 가이드 부품</p>
+    <h1>Ant Design 투어를 참고해<br><em>우리 손으로 다시 만든</em> 사용 가이드</h1>
+    <p class="lead">외부 패키지를 설치하지 않고, 고객사 관리자 화면에 파일 두 개로 붙이는 단계별 안내입니다. 아래 버튼을 눌러 직접 써 보세요.</p>
+    <div class="hero__cta">
+      <button type="button" class="btn btn--primary btn--lg" id="hero-start">이 페이지 안내 받기</button>
+      <a class="btn btn--lg" href="#admin">관리자 화면 예시 보기</a>
+    </div>
+    <ul class="chips">
+      <li>외부 코드 0줄</li>
+      <li id="size-chip">파일 2개 · 전송 약 11KB</li>
+      <li>폰에선 아래 시트로 전환</li>
+      <li>리액트·뷰·일반 HTML 어디든</li>
+    </ul>
+  </section>
+
+  <section class="demo" id="basic">
+    <div class="demo__head">
+      <span class="tag">01</span>
+      <div>
+        <h2>기본</h2>
+        <p>Ant Design 기본 예제와 같은 구성입니다. 첫 장에 그림을 넣고, 아래 점으로 진행을 보여 주고, 이전·다음으로 넘깁니다.</p>
+      </div>
+    </div>
+    <div class="stage">
+      <button type="button" class="btn btn--primary" id="basic-start">투어 시작</button>
+      <div class="stage__row">
+        <button type="button" class="btn" id="b-upload">파일 올리기</button>
+        <button type="button" class="btn btn--primary" id="b-save">저장</button>
+        <button type="button" class="btn btn--icon" id="b-more" aria-label="더 보기">⋯</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo" id="nomask">
+    <div class="demo__head">
+      <span class="tag">02</span>
+      <div>
+        <h2>화면을 막지 않는 모드</h2>
+        <p>어둡게 깔지 않고 강조색 말풍선만 띄웁니다. 이미 쓰던 사람에게 새 기능만 알릴 때 씁니다. 말풍선이 떠 있어도 화면을 그대로 누를 수 있습니다.</p>
+      </div>
+    </div>
+    <div class="stage">
+      <button type="button" class="btn btn--primary" id="nomask-start">말풍선 띄우기</button>
+      <div class="stage__row">
+        <button type="button" class="btn" id="n-upload">파일 올리기</button>
+        <button type="button" class="btn btn--primary" id="n-save">저장</button>
+        <button type="button" class="btn btn--icon" id="n-more" aria-label="더 보기">⋯</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo" id="placement">
+    <div class="demo__head">
+      <span class="tag">03</span>
+      <div>
+        <h2>위치 지정</h2>
+        <p>말풍선을 위·아래·왼쪽·오른쪽에 둘 수 있습니다. 자리가 모자라면 스스로 반대편으로 옮기고, 화면 끝에 닿으면 안쪽으로 밀어 넣습니다.</p>
+      </div>
+    </div>
+    <div class="stage stage--place">
+      <div class="place-target" id="place-target">대상</div>
+      <div class="stage__row">
+        <button type="button" class="btn" data-place="top">위</button>
+        <button type="button" class="btn" data-place="bottom">아래</button>
+        <button type="button" class="btn" data-place="left">왼쪽</button>
+        <button type="button" class="btn" data-place="right">오른쪽</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo" id="indicator">
+    <div class="demo__head">
+      <span class="tag">04</span>
+      <div>
+        <h2>진행 표시 바꾸기</h2>
+        <p>몇 번째 단계인지 점, 숫자, 막대 중 하나로 보여 줍니다. 기본은 점이고, 지나온 단계는 옅은 색으로 남겨 어디까지 왔는지 보이게 했습니다.</p>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="stage__row">
+        <button type="button" class="btn" data-ind="dots">점</button>
+        <button type="button" class="btn" data-ind="count">숫자 (2 / 3)</button>
+        <button type="button" class="btn" data-ind="bar">막대</button>
+      </div>
+      <div class="stage__row stage__row--chips">
+        <span class="mini" id="i-a">상품 목록</span>
+        <span class="mini" id="i-b">주문 관리</span>
+        <span class="mini" id="i-c">정산</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo demo--wide" id="admin">
+    <div class="demo__head">
+      <span class="tag">05</span>
+      <div>
+        <h2>실제 관리자 화면에서</h2>
+        <p>고객사 '상품 등록' 화면을 흉내 낸 예시입니다. 들어오자마자 덮치지 않고, 카테고리 옆 깜빡이는 점이나 오른쪽 위 '사용 가이드'로 시작합니다. 투어는 3단계만, 나머지는 칸 위 한 줄 설명이 맡습니다. 한 번 끝내면 점이 사라지고, '사용 가이드'로 언제든 다시 봅니다.</p>
+      </div>
+    </div>
+    <div class="admin">
+      <aside class="admin__side" aria-label="관리자 메뉴">
+        <div class="admin__logo">우리상회 관리자</div>
+        <a>대시보드</a>
+        <a class="on">상품 관리</a>
+        <a>주문 관리</a>
+        <a>고객 관리</a>
+        <a>설정</a>
+      </aside>
+      <div class="admin__main" id="admin-scroll">
+        <div class="admin__top">
+          <div>
+            <p class="admin__crumb">상품 관리 › 상품 등록</p>
+            <h3>상품 등록</h3>
+          </div>
+          <button type="button" class="btn btn--sm" id="admin-help"><span aria-hidden="true">?</span> 사용 가이드</button>
+        </div>
+        <div class="card">
+          <h4>기본 정보</h4>
+          <div class="grid">
+            <label class="field" id="f-category">
+              <span class="field__label">카테고리 <i>*</i></span>
+              <span class="field__hint">고른 카테고리에 맞춰 아래 '상품 스펙' 칸이 생겨요</span>
+              <select><option>카테고리를 고르세요</option><option>스마트폰</option><option>노트북</option><option>태블릿</option></select>
+            </label>
+            <label class="field">
+              <span class="field__label">브랜드</span>
+              <span class="field__hint">없으면 비워 두세요</span>
+              <select><option>선택 안 함</option><option>삼성</option><option>애플</option></select>
+            </label>
+            <label class="field field--full">
+              <span class="field__label">상품명 <i>*</i></span>
+              <span class="field__hint">목록과 검색에 그대로 보여요</span>
+              <input type="text" placeholder="">
+            </label>
+          </div>
+        </div>
+        <div class="card">
+          <h4>판매 정보</h4>
+          <div class="grid grid--3">
+            <label class="field" id="f-price">
+              <span class="field__label">판매가 <i>*</i></span>
+              <span class="field__hint">고객이 실제로 결제하는 금액</span>
+              <input type="text" inputmode="numeric" value="">
+            </label>
+            <label class="field">
+              <span class="field__label">정가</span>
+              <span class="field__hint">할인 전 가격, 줄 그어 보여요</span>
+              <input type="text" inputmode="numeric" value="">
+            </label>
+            <label class="field">
+              <span class="field__label">재고</span>
+              <span class="field__hint">0이면 품절로 보여요</span>
+              <input type="text" inputmode="numeric" value="">
+            </label>
+          </div>
+          <details class="more">
+            <summary>배송비는 어떻게 매겨지나요?</summary>
+            <p>비워 두면 설정에 적힌 기본 배송비가 붙습니다. 이 상품만 다르게 받으려면 금액을 적으세요.</p>
+          </details>
+        </div>
+        <div class="card">
+          <h4>이미지</h4>
+          <div class="upload">사진을 끌어다 놓거나 눌러서 고르세요 · 첫 장이 대표 이미지</div>
+        </div>
+        <div class="card">
+          <h4>상세 설명</h4>
+          <div class="editor"><div class="editor__bar"></div><div class="editor__body"></div></div>
+        </div>
+        <div class="admin__actions">
+          <button type="button" class="btn">취소</button>
+          <button type="button" class="btn btn--primary" id="f-submit">등록</button>
+        </div>
+      </div>
+    </div>
+    <p class="note"><button type="button" class="linkish" id="admin-reset">처음 온 사람 상태로 되돌리기</button> — 끝낸 기록을 지워 깜빡이는 점을 다시 띄웁니다.</p>
+  </section>
+
+  <section class="demo" id="better">
+    <div class="demo__head">
+      <span class="tag">06</span>
+      <div>
+        <h2>Ant Design 투어에서 가져온 것, 우리가 더한 것</h2>
+        <p>코드는 한 줄도 가져오지 않았습니다. 화면 구성과 움직임만 보고 처음부터 새로 짰습니다.</p>
+      </div>
+    </div>
+    <div class="two">
+      <div class="panel">
+        <h3>가져온 것</h3>
+        <ul class="list">
+          <li>첫 장에 그림을 넣는 구성</li>
+          <li>아래 점으로 보여 주는 진행 표시</li>
+          <li>이전·다음·닫기 단추 배치</li>
+          <li>화면을 막지 않는 모드와 강조색 말풍선</li>
+          <li>위·아래·왼쪽·오른쪽 위치 지정</li>
+          <li>강조 영역 여백·둥글기 조절</li>
+        </ul>
+      </div>
+      <div class="panel panel--accent">
+        <h3>우리가 더한 것</h3>
+        <ul class="list list--check" id="better-list">
+          <li><b>폰에서는 화면 아래 시트로 바뀝니다.</b> 설명창이 잘리지 않습니다. (Ant Design 문서 예제를 폰 폭 390px로 열었을 때는 설명창 왼쪽이 잘렸습니다 — 10/16 실측)</li>
+          <li><b>대상이 화면 밖이면 부드럽게 데려옵니다.</b> 스크롤 상자 안에 있는 칸도 찾아갑니다.</li>
+          <li><b>설명창이 화면 끝에 닿으면 반대편으로 옮깁니다.</b> 그래도 넘치면 화면 안으로 밀어 넣습니다.</li>
+          <li><b>사용자가 시작합니다.</b> '사용 가이드' 단추나 깜빡이는 점으로 열고, 끝내거나 닫은 사람에겐 다시 뜨지 않습니다.</li>
+          <li><b>키보드 ← → Esc</b>로 넘기고, 화면 낭독기에 "3단계 중 2단계"를 읽어 줍니다.</li>
+          <li><b>움직임 줄이기</b>를 켠 사람에겐 움직임을 끕니다.</li>
+          <li><b>리액트가 아니어도 됩니다.</b> 뷰·라라벨·일반 HTML 어디든 파일 두 개면 됩니다.</li>
+          <li><b>한국어 문구가 기본</b>이고, 고객사 색으로 한 줄이면 바뀝니다.</li>
+        </ul>
+        <p class="measure" id="measure-line">실측: PC 1440×900·1920×1080, 태블릿 768×1024, 폰 390×844에서 이 페이지의 모든 투어 단계 — 설명창이 화면 밖으로 나간 경우 0건.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo" id="usage">
+    <div class="demo__head">
+      <span class="tag">07</span>
+      <div>
+        <h2>고객사 화면에 붙이는 법</h2>
+        <p>파일 두 개를 프로젝트에 넣고, 단계만 적으면 됩니다. 색은 고객사 관리자 색으로 바꿉니다.</p>
+      </div>
+    </div>
+<pre class="code"><code>&lt;link rel="stylesheet" href="hf-tour.css"&gt;
+&lt;script src="hf-tour.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  HFTour.create({
+    storageKey: 'product-create-guide-v1',
+    launcher: { label: '사용 가이드' },
+    beacon: { target: '#category' },
+    steps: [
+      { target: '#category', title: '카테고리부터 고르세요',
+        description: '고른 카테고리에 맞춰 아래 스펙 칸이 생겨요.' },
+      { target: '#price', title: '판매가를 적어요',
+        description: '고객이 실제로 결제하는 금액이에요.' },
+      { target: '#submit', title: '등록하면 바로 보여요',
+        description: '노출을 끄면 저장만 됩니다.' }
+    ]
+  });
+&lt;/script&gt;
+
+/* 고객사 색 맞추기 */
+.hft-root, .hft-launcher, .hft-beacon { --hft-primary: #e8552f; }</code></pre>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>어니스트패밀리 자체 제작 · 외부 라이브러리 코드 없음 · 내부 검토용 시연 페이지</p>
+</footer>
+
+<script src="hf-tour.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>

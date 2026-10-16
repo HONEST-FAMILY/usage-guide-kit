@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" width="640" height="300">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eaf0ff"/>
+      <stop offset="1" stop-color="#f6f8ff"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f3f6fd"/>
+    </linearGradient>
+    <linearGradient id="btn" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4b80ff"/>
+      <stop offset="1" stop-color="#2f6bff"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="300" fill="url(#bg)"/>
+  <circle cx="92" cy="62" r="34" fill="#dfe8ff"/>
+  <circle cx="560" cy="236" r="46" fill="#dfe8ff"/>
+  <circle cx="548" cy="70" r="6" fill="#b9cbff"/>
+  <circle cx="118" cy="230" r="5" fill="#b9cbff"/>
+  <rect x="190" y="58" width="260" height="184" rx="18" fill="url(#card)" stroke="#d7e0f5"/>
+  <rect x="214" y="82" width="212" height="112" rx="12" fill="#eef3ff" stroke="#c9d7fb" stroke-dasharray="6 6"/>
+  <path d="M238 176l40-44 30 32 22-22 40 34z" fill="#c3d3ff"/>
+  <circle cx="392" cy="112" r="12" fill="#ffd36b"/>
+  <rect x="214" y="208" width="116" height="14" rx="7" fill="#dfe6f6"/>
+  <rect x="214" y="208" width="70" height="14" rx="7" fill="#9fb8ff"/>
+  <g transform="translate(436 52)">
+    <circle cx="0" cy="0" r="34" fill="url(#btn)"/>
+    <path d="M0 15V-13M-11 -2L0 -13L11 -2" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  <g fill="#2f6bff">
+    <path d="M150 140l4 9 9 4-9 4-4 9-4-9-9-4 9-4z" opacity=".55"/>
+    <path d="M500 150l3 6 6 3-6 3-3 6-3-6-6-3 6-3z" opacity=".45"/>
+  </g>
+</svg>
